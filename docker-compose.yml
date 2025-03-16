@@ -18,7 +18,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/nestjs-tasks
+      - MONGO_URI=mongodb://mongodb:27017/reservation-tasks-module
     volumes:
       - .:/usr/src/app
     command: npm run start:dev

@@ -11,7 +11,7 @@ export class Reservation {
   @Prop({ required: true })
   guestName: string;
 
-  @Prop({ enum: ['oczekująca', 'zrealizowana', 'anulowana'], required: true })
+  @Prop({ enum: ['WAITING', 'DONE', 'CANCLED'], required: true })
   status: string;
 
   @Prop({ required: true })

@@ -7,6 +7,13 @@ import * as fs from 'fs';
 import { agenda } from '../agenda';
 
 
+interface ReservationRow {
+  reservation_id: string;
+  guest_name: string;
+  status: string;
+  check_in_date: string;
+  check_out_date: string;
+}
 
 @Injectable()
 export class TasksService {
@@ -27,15 +34,15 @@ export class TasksService {
         const errorReport: any[] = [];
 
         for (const row of data) {
-          const { reservation_id, guest_name, status, check_in_date, check_out_date } = row ;
+          const { reservation_id, guest_name, status, check_in_date, check_out_date } = row as ReservationRow;
 
           if (!reservation_id || !guest_name || !status || !check_in_date || !check_out_date) {
-            errorReport.push({ row, reason: 'Brak wymaganych pól' });
+            errorReport.push({ row, reason: 'no fields to push' });
             continue;
           }
 
-          if (!['oczekująca', 'zrealizowana', 'anulowana'].includes(status)) {
-            errorReport.push({ row, reason: 'Nieprawidłowy status rezerwacji' });
+          if (!['PENDING', 'DONE', 'CANCLED'].includes(status)) {
+            errorReport.push({ row, reason: 'Unknow status' });
             continue;
           }
         }
